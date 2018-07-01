@@ -9,8 +9,13 @@ datapath = './data/exchangerate.xls'
 #通过Yahoo查询汇率，网站不支持CNY／HKD需要通过美元转换
 def getCNY2HKDFromYahoo(start, end):
 
-    cny2usd = web.DataReader("CNY=X", 'yahoo', start, end)
-    hkd2usd = web.DataReader("HKD=X", 'yahoo', start, end)
+    try:
+        cny2usd = web.DataReader("CNY=X", 'yahoo', start, end)
+        hkd2usd = web.DataReader("HKD=X", 'yahoo', start, end)
+    except:
+        print('getCNY2HKDFromYahoo error!')
+    else:
+        print('getCNY2HKDFromYahoo success!')
 
     return cny2usd / hkd2usd
 
@@ -43,8 +48,10 @@ def getCNY2HKD():
         print('read error', datapath, '/n')
     else:
         enddate = cny2hkd.iloc[-1, 0]
-        if enddate >= datetime.today():
+        delta = datetime.today()-enddate
+        if delta.days <= 0:
             needUpdate = False
+            print('don\'t need to update!')
 
     if needUpdate:
         print('update ', datapath)
@@ -53,7 +60,7 @@ def getCNY2HKD():
         except:
             print('update error', datapath)
         else:
-            print('update data sucess!!!')
+            print('update data success!!!')
     return cny2hkd
 
 

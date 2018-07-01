@@ -3,6 +3,7 @@ import pandas as pd
 import pandas_datareader.data as web
 import datetime as dt
 import numpy as np
+from datetime import datetime
 
 datapath = './data/txprice.xls'
 reportpath = './data/txfinacial.xls'
@@ -38,8 +39,10 @@ def getTxPrice():
         print('read TxPrice error', datapath, '/n')
     else:
         enddate = txprice.iloc[-1, 0]
-        if enddate >= datetime.today():
+        deltime = datetime.today() - enddate
+        if deltime.days <= 0:
             needUpdate = False
+            print('don\'t need update')
 
     if needUpdate:
         print('update 700 price', datapath)
