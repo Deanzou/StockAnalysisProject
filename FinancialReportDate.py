@@ -24,8 +24,9 @@ def GetReportsDates2Excel():
 
         print(tag)
         textlist.append(tag)
-    reportDates = pd.DataFrame({'Date': datelist,
-                                'Reports': textlist})
+    #reportDates = pd.DataFrame({'Date': datelist,
+    #                            'Reports': textlist})
+    reportDates = pd.DataFrame(textlist, columns = ['Reports'],index = datelist )
     reportDates.to_excel(xlsPath, sheet_name='700Reports')
 
 
