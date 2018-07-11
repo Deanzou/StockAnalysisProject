@@ -87,7 +87,13 @@ def PageData2DataFrame():
     #print(tableParent.tbody)
 
     table = tableParent.find_all('tr', re.compile("^row"))
-    print(table)
+    #print(table)
+    for row in table:
+        print(row.contents[1].text)#参与者编号
+        print(row.contents[3].text)#中央结算系统参与者名称(*即愿意披露的投资者户口持有人)
+        print(row.contents[5].text)#地址
+        print(row.contents[7].text)#持股数量
+        print(row.contents[9].text)#占已发行股份/权证/单位百分比
 
     pageFile.close()
 
