@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>
+	:: HKEX :: HKEXnews ::
+</title><link href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/css/hkex_css.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/script/hkex_scripts.js"></script>
+    <script type="text/javascript" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/script/hkex_common_c.js"></script>
+    <script type="text/javascript" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/script/hkex_setting_c.js"></script>
+    <script type="text/javascript" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/js/search_form_var_chi.js?v=20150720"></script>
+    <script type="text/javascript" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/js/search_form.js?v=20150720"></script>
+    <script type="text/javascript">
+        function PopUpStockList() {
+            shareholdingDate = $("select[id$='ddlShareholdingYear']").val() + $("select[id$='ddlShareholdingMonth']").val() + $("select[id$='ddlShareholdingDay']").val();
+            window.open('http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/stocklist_c.aspx?SortBy=StockCode&amp;ShareholdingDate=' + shareholdingDate, '', 'directories=no,menubar=no,scrollbars=yes,status=no,toolbar=no,height=400,width=400');
+            return false;
+        }
+        function PopUpParticipantList() {
+            shareholdingDate = $("select[id$='ddlShareholdingYear']").val() + $("select[id$='ddlShareholdingMonth']").val() + $("select[id$='ddlShareholdingDay']").val();
+            window.open('http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/partlist_c.aspx?SortBy=PartID&amp;ShareholdingDate=' + shareholdingDate, '', 'directories=no,menubar=no,scrollbars=yes,status=no,toolbar=no,height=400,width=400');
+            return false;
+        }
+        function Re_sort(sortBy) {
+            $("input[id='sortBy']").val(sortBy);
+            $("input[id='btnSearch']").click();
+        }
+        var checkShareholdingDate = true;
+    </script>
+</head>
+<body class="body1" style="margin: 0px; background-color: #FFFFFF; color: #333333;" link="#333333" vlink="#336699">
+    <script type="text/javascript" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/script/hkex_head_utf_c.js"></script><!-- Page Header Start -->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="body1">
+    <tbody><tr>
+      <td>
+  <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+      <td width="20"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="1" /></td>
+      <td width="254" valign="top"><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/index_c.htm" target="_self"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/logo_HKExnews.gif" alt="HKExnews" width="254" height="43" border="0" /></a></td>
+      <td width="20"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="51" /></td>
+      <td align="right" valign="top"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="437" height="51" /></td>
+      <td><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="51" /></td>
+      <td align="right" valign="top">
+      	<table border="0" cellspacing="0" cellpadding="0">
+          <tbody><tr>
+            <td height="16" colspan="3"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="20" height="16" /></td>
+          </tr>
+          <tr>
+         <td><a href="javascript:route('sim','eng')" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Lang1','','/image/olang_button1_c.gif',1)"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/lang_button1_c.gif" alt="英文" border="0" name="Lang1" /></a></td>
+            <td><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_l.gif" width="11" height="17" /></td>
+         <td><a href="javascript:route('sim','chi')" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Lang2','','/image/olang_button2_c.gif',1)"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/lang_button2_c.gif" alt="繁体" border="0" name="Lang2" /></a></td>
+          </tr>
+        </tbody></table></td>
+      <td width="20"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="51" /></td>
+      <td width="143" align="right"><a target="_blank" href="http://sc.hkex.com.hk/TuniS/www.hkex.com.hk/?sc_lang=zh-cn"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/logo_HKEx.gif" alt="HKEx" width="143" height="73" border="0" longdesc="http://www.hkex.com.hk" /></a></td>
+      <td width="20"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="51" /></td>
+    </tr>
+    <tr>
+      <td colspan="9"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="100" height="10" /></td>
+    </tr>
+  </tbody></table>
+      </td>
+    </tr>
+  </tbody></table>
+<!-- Page Header End -->
+<!-- Page Navigation Menu Start -->
+  <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+      <td align="left" valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#D4D6ED">
+        <tbody><tr>
+          <td background="/image/bkg_redbar.gif"> </td>
+          <td background="/image/bkg_redbar.gif"><table border="0" cellspacing="5" cellpadding="0">
+              <tbody><tr>
+                <td nowrap="nowrap"><span class="pming14white"><strong>上市公司公告</strong></span></td>
+                <td nowrap="nowrap"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+              </tr>
+          </tbody></table></td>
+          <td width="1" bgcolor="#FFFFFF"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="1" height="20" /></td>
+          <td background="/image/bkg_redbar.gif"><table border="0" cellspacing="5" cellpadding="0">
+              <tbody><tr>
+                <td nowrap="nowrap"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+                <td nowrap="nowrap"><span class="pming14white"><strong>股权披露</strong></span></td>
+                <td nowrap="nowrap"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+              </tr>
+          </tbody></table></td>
+          <td width="1" bgcolor="#FFFFFF"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="1" height="20" /></td>
+          <td colspan="2" background="/image/bkg_redbar.gif"><table border="0" cellspacing="5" cellpadding="0">
+              <tbody><tr>
+                <td nowrap="nowrap"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+                <td nowrap="nowrap"><span class="pming14white"><strong>发行人相关资料</strong></span></td>
+              </tr>
+          </tbody></table></td>
+          <td background="/image/bkg_bluebar.gif"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="225" height="20" /></td>
+        </tr>
+        <tr>
+          <td valign="bottom"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/cr_bottom_left.gif" width="8" height="8" /></td>
+          <td><table border="0" cellspacing="0" cellpadding="0">
+              <tbody><tr>
+                <td colspan="2"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td nowrap="nowrap"><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/listedco/listconews/mainindex/SEHK_LISTEDCO_DATETIME_TODAY_C.HTM" class="menu">最新公告</a></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/listedco/listconews/simplesearch/simplesearch_main_c.aspx" class="menu">简易搜寻</a></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/listedco/listconews/advancedsearch/search_active_main_c.aspx" class="menu">进阶搜寻</a></td>
+              </tr>
+              <tr>
+                <td colspan="2"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+              </tr>
+          </tbody></table></td>
+          <td width="1" bgcolor="#A8AFD7"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="1" height="20" /></td>
+          <td align="left" valign="top"><table border="0" align="left" cellpadding="0" cellspacing="0">
+              <tbody><tr>
+                <td width="5" rowspan="4"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="5" /></td>
+                <td colspan="2"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td align="left" nowrap="nowrap"><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/di/di_c.htm" class="menu">披露权益</a></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td align="left" nowrap="nowrap"><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/searchsdw_c.aspx" class="menu">中央结算系统持股纪录查询服务</a></td>
+              </tr>
+              <tr>
+                <td width="11" valign="top"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td align="left" nowrap="nowrap"><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/mutualmarketsdw/main_c.htm" class="menu">沪港通及深港通持股纪录查询服务</a></td>
+              </tr>
+          </tbody></table></td>
+          <td width="1" bgcolor="#A8AFD7"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="1" height="20" /></td>
+          <td align="left" valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tbody><tr>
+                <td width="5" rowspan="4"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="20" /></td>
+                <td colspan="2"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="5" height="5" /></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td nowrap="nowrap"><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/reports/prolongedsusp/Documents/psuspenrep_mb_c.doc" class="menu" target="_blank">有关长时间停牌公司之报告</a></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/reports/sharerepur/sbn_c.asp" class="menu">股份购回报告</a></td>
+              </tr>
+              <tr>
+                <td width="11"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/img_dotred.gif" width="15" height="17" /></td>
+                <td><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/APP/SEHKAPPMainIndex_c.htm" class="menu">申请版本及聆讯后资料集</a></td>
+              </tr>
+              <tr>
+                <td colspan="3"><table border="0" align="right" cellpadding="1" cellspacing="0" width="100%">
+                    <tbody><tr>
+                      <td align="right" valign="middle" nowrap="nowrap"><a href="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/reports/issuerinfo/issuerinfo_c.htm" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('more1','','/image/omore_c.gif',1)"><img src="/image/more_c.gif" alt="more" name="more1" border="0" id="more1" /></a></td>
+                    </tr>
+                </tbody></table></td>
+              </tr>
+          </tbody></table></td>
+          <td align="right" valign="bottom"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/cr_bottom_right.gif" width="8" height="8" /></td>
+          <td align="left" valign="top" bgcolor="#FFFFFF"> </td>
+        </tr>
+        <tr>
+          <td height="10" colspan="8" align="left" valign="bottom" bgcolor="#FFFFFF"><img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="20" height="10" /></td>
+        </tr>
+      </tbody></table>
+<!-- Page Navigation Menu End -->
+  <table width="950" border="0" cellspacing="0" cellpadding="0">
+    <tbody><tr> 
+		<td width="950" valign="top" align="center"> 
+<!-- BEGIN OF PAGE CONTENTS -->
+
+    <form name="form1" method="post" action="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/searchsdw_c.aspx" id="form1" style="text-align: left;">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="WRClF5lPB1QLOqK4THFQcR5lbU/xbfeAkYU4CVjn/qte6u214YLDJmLCouVdVN9rsWi9t6yd7UGd9Q2B7KiulXgNJsq4A8kVua2DkVn9KdI5pErJRmu7I7eTwbM5s4BO8VfH0KPm5qKGWbbriCafuV1TTc8xUxq+nknzjBM4VhlJU3MOEP7/iUigfrg75yx9lOLQzQ==" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="3B50BBBD" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="ZdlhAtyg1lwWmRYcwMt9DUOLuoSukpH1HVP37GwrTbugSm2BdKawFmJ0bYpqHcr24WrZ7Ntc3KSZr9PZQ0xQUzzuEYJ/Zli6CyFqJHizhiwyb3DrCqpvIvx/Oa7u6GXk3G4s4R0/VNfMRZUkRP7C7sQRT+TzOJvqkknF4/pjyk0ilSKdIyFGYaZzY1SJva5aSI5N9KbrH1CkoWmEd48fBzee/M+LatHxUy87fCvOiJQZsatLnJO89plG5OWIbHNKTjEhrvxOXUKCru/zGuWfDx3bjjZshDYgbr+wc56dSJkDstyf/o8q1EkYYBGf/tUiYu8VaJmGLi9b17qJNlxMQAnmV8t6DWdZk7976sx9PvxUOYBgw4Ohvi4wcn0wZb7R4WzTSwKRH1+UhR+k55WCSza348suFZScXSZyWvIRi13zyVlppQ6BLh55bXgxlcoCbEEaopiGuwQ66qHBwi5xbTQwTc2gHyKvmr6er5kWAyTcKeSUkLMf6suN9S3LTNswIyDB0TUdnCN0t1Fla10fMG9A6QFxfQEQV3Blftqg2nSP+mqf7kX7D4PaGGdU38tYycrOsgQkWM+UQluM0KwU/LtMCdNkNp0XTT6iUy4fR/HE70TCvXLEXkf/QTrUGLbRVLjud1T6AcVoouTH3ADag9nErKnvokt8XvoeM2NWWl90A0ewIJJyZyBz/zwx1Qfb8+WXd9ibBsTXCkkMzP2ngH2Kbf6CpT5uOBGoaU+PQDh5ng+RWSQSIEHqL3FnofPyrORQGSpaGpUpqy/9mtRXTVLQ+bUfdHyITQPgXwydKgZ/g2bHKKm3dADnRPcdpYh4AE4OY6R9CpvgqoWzJsUCUrvkeudSpTcxFwXybhDkcqIFwZGA6GiLrEMSqJB349XgLmOx5tZrtJMBT6oKUYouZeP2TG4+HIU+jkQc29y9oQ6v2FogYyKqOKgtdB7InuT87982CPs9SWVmmBfPoZeCt8rCs+tGgQTMDi10zgW+Sf7ImZIKyAhdVWspzChDURFVHLVlJLVbpHn6MTLMgaVCpV2fRlLErg+dtvKy5MmtjaSuTWR8/BDuH1YbWdaNmg9ABILJ42j5fgO7Cs5xWtKH2y8U5dWYhS6j2H5YGDLZdRQh9M83TPn985+Wqtwl2gPYTSo6V4wVpBgdpe4LjPZ73DCyQZ7te47ljFUQPYtpqnf3S8Xt4lRist8toMO5z9KxzXmQ9OVeThpYzKppCI1e6Oj7RWrBWnxTj6IaA1BqWwb7MsAnmEAslzQb0Pop7tXr76tuDw==" />
+</div>
+        <input type="hidden" name="today" id="today" value="20180714" />
+        <input type="hidden" name="sortBy" id="sortBy" />
+        <input type="hidden" name="selPartID" id="selPartID" />
+        <input type="hidden" name="alertMsg" id="alertMsg" />
+        <div id="pnlDisclaimer">
+	
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="table_header">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <td width="8" align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" alt="" width="10" height="10" />
+                                </td>
+                                <td width="100%">
+                                    <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                                        <tbody><tr>
+                                            <!-- page title label: CCASS shareholding information Search -->
+                                            <td nowrap="nowrap">
+                                                <span class="arial12black"><strong>
+                                                    中央结算系统持股纪录查询服务</strong></span>
+                                            </td>
+                                            <td style="text-align: right;" nowrap="nowrap" class="arial11black">
+                                                请注意本<a href="http://www.hkexnews.hk/sdw/search/files/Disclaimer%20(C).doc" target="_blank">免责声明</a>。
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <td width="8" align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" alt="" width="10" height="10" />
+                                </td>
+                                <td width="100%">
+                                    <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                                        <tbody><tr>
+                                            <!-- Explanatory note -->
+                                            <td>
+                                                <span class="arial12black">
+                                                    阁下可査询过去十二个月的中央结算系统持股纪录，按阁下选择的股份及持股日期所显示的资料乃中央结算系统参与者于该日日终的持股量。如果所选择的持股日期是星期日或香港公共假期，则会显示最后一个非星期日或香港公共假期的持股纪录。
+<br /><br />
+如欲查询，请选择持股日期及输入股份代号或股份名称；如欲查询某指定中央结算系统参与者于某日持有某股份的数量，亦可一并输入该中央结算系统参与者的编号或名称。
+<br /><br />
+阁下亦可透过 <a href="" mailto:psh@hkex.com.hk""=""><u>psh@hkex.com.hk</u></a> 递交书面申请以索取过去七年的中央结算系统持股记录，有关资料将会透过光碟或其他方式发放，并需收取费用。</span>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="background-color: #000000; width: 100%; height: 1px; padding: 0px;"></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody></table>
+        
+</div>
+        <div id="pnlSearch">
+	
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table_header">
+                <tbody><tr>
+                    <td height="8" align="left" valign="bottom" bgcolor="#FFFFFF">
+                        <!-- Outter Cells  -->
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <!-- 1st blink row -->
+                                <td colspan="4" align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Shareholding date -->
+                                <td align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                                <td align="left">
+                                    <table border="0" cellspacing="0" cellpadding="5">
+                                        <tbody><tr>
+                                            <td style="text-align: right;" nowrap="nowrap" class="arial12black">
+                                                持股日期
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td width="100%" align="left" valign="top" nowrap="nowrap" class="arial12black">
+                                    <select name="ddlShareholdingDay" id="ddlShareholdingDay" class="arial12black">
+		<option value="01">01</option>
+		<option value="02">02</option>
+		<option value="03">03</option>
+		<option value="04">04</option>
+		<option value="05">05</option>
+		<option value="06">06</option>
+		<option value="07">07</option>
+		<option value="08">08</option>
+		<option value="09">09</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option selected="selected" value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+		<option value="31">31</option>
+
+	</select>
+                                    <select name="ddlShareholdingMonth" id="ddlShareholdingMonth" class="arial12black">
+		<option value="01">01</option>
+		<option value="02">02</option>
+		<option value="03">03</option>
+		<option value="04">04</option>
+		<option value="05">05</option>
+		<option value="06">06</option>
+		<option selected="selected" value="07">07</option>
+		<option value="08">08</option>
+		<option value="09">09</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+
+	</select>
+                                    <select name="ddlShareholdingYear" id="ddlShareholdingYear" class="arial12black">
+		<option selected="selected" value="2018">2018</option>
+		<option value="2017">2017</option>
+
+	</select>
+                                </td>
+                                <td>
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- stock code -->
+                                <td align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                                <td align="left">
+                                    <table border="0" cellspacing="0" cellpadding="5">
+                                        <tbody><tr>
+                                            <td style="text-align: right;" nowrap="nowrap" class="arial12black">
+                                                股份代号
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td width="100%" align="left" valign="top">
+                                    <table border="0" cellspacing="0" cellpadding="2">
+                                        <tbody><tr>
+                                            <td nowrap="nowrap">
+                                                <input name="txtStockCode" type="text" value="00700" maxlength="5" id="txtStockCode" class="arial12black" size="10" />
+                                            </td>
+                                            <td nowrap="nowrap">
+                                                <a style="cursor: pointer;" onclick="Javascript:PopUpStockList();"><span class="arial11grey" onmouseover="this.style.textDecoration=&quot;underline&quot;" onmouseout="this.style.textDecoration=&quot;none&quot;">
+                                                    股份名单</span></a>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td>
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Stock name -->
+                                <td align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                                <td align="left">
+                                    <table border="0" cellspacing="0" cellpadding="5">
+                                        <tbody><tr>
+                                            <td style="text-align: right;" nowrap="nowrap" class="arial12black">
+                                                股份名称
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td width="100%" align="left" valign="top">
+                                    <table border="0" cellspacing="0" cellpadding="2">
+                                        <tbody><tr>
+                                            <td nowrap="nowrap">
+                                                <input name="txtStockName" type="text" maxlength="80" id="txtStockName" class="arial12black" size="60" />
+                                                
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td>
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Partip. ID -->
+                                <td align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                                <td align="left">
+                                    <table border="0" cellspacing="0" cellpadding="5">
+                                        <tbody><tr>
+                                            <td style="text-align: right;" nowrap="nowrap" class="arial12black">
+                                                中央结算系统参与者编号
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td width="100%" align="left" valign="top">
+                                    <table border="0" cellspacing="0" cellpadding="2">
+                                        <tbody><tr>
+                                            <td nowrap="nowrap">
+                                                <input name="txtParticipantID" type="text" maxlength="6" id="txtParticipantID" class="arial12black" size="10" />
+                                            </td>
+                                            <td nowrap="nowrap">
+                                                <a style="cursor: pointer;" onclick="Javascript:PopUpParticipantList();"><span class="arial11grey" onmouseover="this.style.textDecoration=&quot;underline&quot;" onmouseout="this.style.textDecoration=&quot;none&quot;">
+                                                    中央结算系统参与者名录(中介人)</span></a>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td>
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Partip. Name -->
+                                <td align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                                <td align="left">
+                                    <table border="0" cellspacing="0" cellpadding="5">
+                                        <tbody><tr>
+                                            <td style="text-align: right;" nowrap="nowrap" class="arial12black">
+                                                中央结算系统参与者名称
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td width="100%" align="left" valign="top">
+                                    <table border="0" cellspacing="0" cellpadding="2">
+                                        <tbody><tr>
+                                            <td nowrap="nowrap">
+                                                <input name="txtParticipantName" type="text" maxlength="80" id="txtParticipantName" class="arial12black" size="60" />
+                                                
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <td>
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- blank row-->
+                                <td height="1" colspan="4" align="left" valign="top">
+                                    <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/spacer.gif" width="10" height="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- button row  -->
+                                <td height="1" align="left" valign="top"> 
+                                </td>
+                                <td height="1" align="left" valign="top"> 
+                                </td>
+                                <td height="1" align="left" valign="top">
+                                    <input type="image" name="btnSearch" id="btnSearch" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/search_c.gif" alt="Search" onclick="if(!preprocessMainForm(document.form1)) return false;" style="border-width:0px;" />
+                                    <a href="javascript:location.href=location.href;">
+                                        <img src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/image/clear_c.gif" border="0" alt="clear" /></a>
+                                </td>
+                                <td height="1" align="left" valign="top"> 
+                                </td>
+                            </tr>
+                        </tbody></table>
+                        <!-- end Outter Cells  -->
+                    </td>
+                </tr>
+            </tbody></table>
+        
+</div>
+        
+    </form>
+    <script type="text/javascript" src="http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/script/hkex_foot.js"></script><!-- END OF PAGE CONTENTS -->
+		</td>
+	</tr>
+</tbody></table>
+
+
+
+</td></tr></tbody></table></body></html>
