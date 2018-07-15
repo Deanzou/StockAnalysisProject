@@ -17,6 +17,8 @@ from selenium.common.exceptions import WebDriverException
 import bs4
 import re
 
+from HKEXBrokersPage import HKEXBrokersPage
+
 
 
 HKEXNewsSearchPath = 'http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/searchsdw_c.aspx'
@@ -93,58 +95,12 @@ def DownloadHKEXNewsPages365(driver, stockcode):
 #处理HKEXNewsPages，导出数据到pandas.dataframe对象
 def PageData2DataFrame(pageFilePath):
     print("PageData2DataFrame begin")
-    soup = None
-    try:
-        pageFile = open(pageFilePath)
-        assert pageFile
-        soup = bs4.BeautifulSoup(pageFile, "lxml")
-    finally:
-        pageFile.close()
 
-    #检查是否持股日期和文件名字一致
-    holdDateTitle = soup.find(text=re.compile("持股日期:"))
-    holdDate = holdDateTitle.parent.find_next('td', attrs={"class": "arial12black", "nowrap": "nowrap"})
-    holdDateText = holdDate.text.strip() #页面日期格式%D/%M/%Y
-    dtholdDate = datetime.datetime.strptime(holdDateText, '%d/%m/%Y')
-    dtFile = datetime.datetime.strptime(pageFilePath[-13:-5], '%Y%m%d')#文件名中的日期
-    assert dtFile == dtholdDate
-    if dtholdDate != dtFile :
-        print("PageData2DataFrame(%s) error end!! holding time != filenametime ", pageFilePath)
-        return
+    page = HKEXBrokersPage(pageFilePath)
 
-    tableParent = soup.select_one('#participantShareholdingList')
-    #print(tableParent.tbody)
-
-    table = tableParent.find_all('tr', re.compile("^row"))
-    #print(table)
-    tableDic = {}#页面对应字典 参与者编号 ： 持股数量
-    ids = []#参与者编号
-    names = []#参与者名称
-    for row in table:
-        # print(row.contents[1].text)#参与者编号
-        # print(row.contents[3].text)#中央结算系统参与者名称(*即愿意披露的投资者户口持有人)
-        # print(row.contents[5].text)#地址
-        # print(row.contents[7].text)#持股数量
-        # print(row.contents[9].text)#占已发行股份/权证/单位百分比
-        #存入到名字id映射表中
-        id = row.contents[1].text.strip().replace('\n', '')
-        name = row.contents[3].text.strip().replace('\n', '')
-        if id == '':
-            id = name
-        assert not id in ids, '页面中参与者编号和名称不应该重复'
-        ids.append(id)
-        names.append(name)
-        #存入到持股数量表
-        n = int(table[0].contents[7].text.strip().replace(',',''))
-        tableDic[id] = n
-
-    print(tableDic)
-    # print(ids)
-    # print(names)
-
-    dtidx = pd.DatetimeIndex([dtholdDate])
-    df = pd.DataFrame(tableDic, dtidx)
-    return df, pd.DataFrame(names, index=ids)
+    dtidx = pd.DatetimeIndex([page.postion_date])
+    df = pd.DataFrame(page.brokers_postion, dtidx)
+    return df, pd.DataFrame(page.brokers_name, index=page.brokers_id)
 
     print("PageData2DataFrame end")
 
@@ -158,17 +114,18 @@ if __name__ == "__main__" :
     try :
         driver = webdriver.Chrome(chrome_options=chromeopt)  # Optional argument, if not specified will search path.
         #driver = webdriver.PhantomJS()
+
+        stockcode = '00700'
+        DownloadHKEXNewsPages365(driver, stockcode)
+
+    except Exception as e:
+        print("DownloadHKEXNewsPages365 error!!!")
+        print(e)
+        pass
+
     finally:
         driver.quit()
 
-    stockcode = '00700'
-    #SaveYesterday2Html()
-
-    try:
-        DownloadHKEXNewsPages365(driver, stockcode)
-    except Exception:
-        print("DownloadHKEXNewsPages365 error!!!")
-        pass
 
     dfBrokerId2Name = pd.DataFrame()
     dfBrokersPostion = pd.DataFrame()
