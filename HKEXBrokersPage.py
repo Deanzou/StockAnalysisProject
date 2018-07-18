@@ -40,12 +40,14 @@ class HKEXBrokersPage(object):
     def load_baseData(self):
         holdDateTitle = self.soup.find(text=re.compile("持股日期:"))
         holdDate = holdDateTitle.parent.find_next('td', attrs={"class": "arial12black", "nowrap": "nowrap"})
-        holdDateText = holdDate.text.strip()  # 页面日期格式%D/%M/%Y
-        self.postion_date = datetime.datetime.strptime(holdDateText, '%d/%m/%Y')
+        if not holdDate is None:
+            holdDateText = holdDate.text.strip()  # 页面日期格式%D/%M/%Y
+            self.postion_date = datetime.datetime.strptime(holdDateText, '%d/%m/%Y')
 
         stockCodeTitle = self.soup.find(text=re.compile("股份代号:"))
         stockCode = stockCodeTitle.parent.find_next('td', attrs={"class": "arial12black", "nowrap": "nowrap"})
-        self.stock_code = stockCode.text.strip()
+        if not stockCode is None:
+            self.stock_code = stockCode.text.strip()
 
     #获取持股列表
     def load_brokerslist(self):
@@ -78,18 +80,25 @@ class HKEXBrokersPage(object):
         idx = self.brokers_name.index(name)
         return self.brokers_postion[self.brokers_id[idx]]
 
+    def get_brokersPostionDataFrame(self):
+        dtidx = pd.DatetimeIndex([self.postion_date])
+        df = pd.DataFrame(self.brokers_postion, dtidx)
+        return df
 
-
+    def get_brokersId2NameDataFrame(self):
+        df = pd.DataFrame(self.brokers_name, index=self.brokers_id)
+        return df
 #***********************************************************************************************************************
 """
 unittest
 """
-searchHtmlCatchPath = './data/HKEXSearchCach'
+
 
 class TestHKEXBrokersPage(unittest.TestCase):
 
     def setUp(self):
-        self.path = searchHtmlCatchPath + '/20180710.html'
+        self.searchHtmlCatchPath = './data/HKEXSearchCach00700'
+        self.path = self.searchHtmlCatchPath + '/20180713.html'
         self.page = HKEXBrokersPage(self.path)
 
     # 检查是否持股日期和文件名字一致
@@ -100,8 +109,8 @@ class TestHKEXBrokersPage(unittest.TestCase):
 
     # 检查列表是否加载完成
     def test_listdata(self):
-        self.assertEqual(self.page.get_brokerPostion('高盛(亚洲)证券有限公司'), 374695248)
-        self.assertEqual(self.page.brokers_postion['C00019'], 1586739828)
+        self.assertEqual(self.page.get_brokerPostion('高盛(亚洲)证券有限公司'), 375441773)
+        self.assertEqual(self.page.brokers_postion['C00019'], 1587869696)
         self.assertEqual(self.page.brokers_address['C00019'], 'HSBC WEALTH BUSINESS SERVICES 8/F TOWER 2 & 3 HSBC CENTRE 1 SHAM MONG ROAD KOWLOON')
         self.assertEqual(self.page.brokers_postion['B02106'], 100)
         self.assertEqual(self.page.brokers_address['B02106'], 'RM 2401-2402 24/F JUBILEE CENTRE 46 GLOUCESTER ROAD WANCHAI HONG KONG')

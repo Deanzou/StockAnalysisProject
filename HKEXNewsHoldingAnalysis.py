@@ -22,7 +22,7 @@ from HKEXBrokersPage import HKEXBrokersPage
 
 
 HKEXNewsSearchPath = 'http://sc.hkexnews.hk/TuniS/www.hkexnews.hk/sdw/search/searchsdw_c.aspx'
-searchHtmlCatchPath = './data/HKEXSearchCach'
+searchHtmlCatchPath = './data/HKEXSearchCach00700'
 
 #填写表单，搜索结果
 def GetHKEXNewsSearchPage(driver, stockcode, date = datetime.date.today() - datetime.timedelta(days=1)):
@@ -53,8 +53,10 @@ def GetHKEXNewsSearchPage(driver, stockcode, date = datetime.date.today() - date
     txtStockCode.send_keys(stockcode)
     search_box = driver.find_element_by_name('btnSearch')
     search_box.click()
-    print(driver.page_source)
+    #print(driver.page_source)
     print('GetHKEXNewsHoldingData() end\n')
+
+    element_list = driver.find_element_by_id("participantShareholdingList")
 
     return driver.page_source
 
@@ -70,6 +72,14 @@ def SaveYesterday2Html():
     fo = open(filename, 'w+')
     fo.write(htmlPage)
     fo.close()
+
+def GetPageDate(page):
+    soup = bs4.BeautifulSoup(page, "lxml")
+    holdDateTitle = soup.find(text=re.compile("持股日期:"))
+    holdDate = holdDateTitle.parent.find_next('td', attrs={"class": "arial12black", "nowrap": "nowrap"})
+    if holdDate != None:
+        holdDateText = holdDate.text.strip()  # 页面日期格式%D/%M/%Y
+        return datetime.datetime.strptime(holdDateText, '%d/%m/%Y')
 
 #下载昨天到过去365天的数据
 #网站只支持下载一年数据
@@ -89,6 +99,8 @@ def DownloadHKEXNewsPages365(driver, stockcode):
                 assert fo
                 fo.write(htmlPage)
                 fo.close()
+                print('download %s success!!'%filename)
+
     print("DownloadHKEXNewsPage365 end")
 
 
@@ -98,9 +110,8 @@ def PageData2DataFrame(pageFilePath):
 
     page = HKEXBrokersPage(pageFilePath)
 
-    dtidx = pd.DatetimeIndex([page.postion_date])
-    df = pd.DataFrame(page.brokers_postion, dtidx)
-    return df, pd.DataFrame(page.brokers_name, index=page.brokers_id)
+
+    return page.get_brokersPostionDataFrame(), page.get_brokersId2NameDataFrame()
 
     print("PageData2DataFrame end")
 
