@@ -91,6 +91,12 @@ def DownloadHKEXNewsPages365(driver, stockcode):
         if not os.path.exists(filename):
             try:
                 htmlPage = GetHKEXNewsSearchPage(driver, stockcode, date)
+                eleDate = driver.find_element_by_xpath("//div[@id='pnlResultHeader']/table/tbody/tr[2]/td/table/tbody/tr/td[2]")
+                pageDate = datetime.datetime.strptime(eleDate.text, "%d/%m/%Y")
+                #filename = searchHtmlCatchPath + '/' + pageDate.strftime('%Y%m%d') + '.html'
+                if pageDate.date() != date:
+                    print("download warnning!!! pagedate != date %s"%filename)
+
             except WebDriverException as e:
                 print("download %s error!!", filename)
                 print(e)
@@ -118,7 +124,7 @@ def PageData2DataFrame(pageFilePath):
 
 if __name__ == "__main__" :
 
-    print('HKEXNewsHoldingAnalysis.py')
+    print('HKEXNewsHoldingAnalysis.py main begin')
 
     chromeopt = webdriver.ChromeOptions()
     chromeopt.add_argument('-headless')
@@ -132,16 +138,7 @@ if __name__ == "__main__" :
     except Exception as e:
         print("DownloadHKEXNewsPages365 error!!!")
         print(e)
-        pass
 
     finally:
         driver.quit()
-
-
-    dfBrokerId2Name = pd.DataFrame()
-    dfBrokersPostion = pd.DataFrame()
-    pageFilePath = searchHtmlCatchPath + '/20180710.html'
-    dfBrokersPostion, dfBrokerId2Name = PageData2DataFrame(pageFilePath)
-
-    print(dfBrokerId2Name)
-    print(dfBrokersPostion)
+        print('HKEXNewsHoldingAnalysis.py main end')
