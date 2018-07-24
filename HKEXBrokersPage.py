@@ -31,6 +31,11 @@ class HKEXBrokersPage(object):
             self.stock_code=''
             self.postion_date=datetime.datetime(1900,1,1)
 
+            #按文件名解析日期，文件中的日期有可能因为周末不一致
+            start = path.rfind('/')+1
+            end = path.rfind('.html')
+            self.fnamedate = datetime.datetime.strptime(path[start:end], '%Y%m%d')
+
             self.load_baseData()
             self.load_brokerslist()
         finally:
@@ -81,7 +86,8 @@ class HKEXBrokersPage(object):
         return self.brokers_postion[self.brokers_id[idx]]
 
     def get_brokersPostionDataFrame(self):
-        dtidx = pd.DatetimeIndex([self.postion_date])
+        #dtidx = pd.DatetimeIndex([self.postion_date])
+        dtidx = pd.DatetimeIndex([self.fnamedate])
         df = pd.DataFrame(self.brokers_postion, dtidx)
         return df
 
