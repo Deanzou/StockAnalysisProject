@@ -18,6 +18,7 @@ import bs4
 import re
 
 from HKEXBrokersPage import HKEXBrokersPage
+from HKEXNewsDatabase import HKEXNewsDatabase
 
 
 
@@ -142,3 +143,16 @@ if __name__ == "__main__" :
     finally:
         driver.quit()
         print('HKEXNewsHoldingAnalysis.py main end')
+
+    print("HKEXNewsDatabase begin")
+    database = HKEXNewsDatabase(searchHtmlCatchPath, '00700')
+
+    try:
+        database.load_csv()
+        database.process_allpages()
+        database.save_csv()
+    except Exception as e:
+        print(e)
+        pass
+
+    print("HKEXNewsDatabase end")
