@@ -4,6 +4,7 @@
 """
 import os
 import pandas as pd
+import datetime
 
 pd.core.common.is_list_like = pd.api.types.is_list_like
 import pandas_datareader.data as web
@@ -66,11 +67,14 @@ class StockHisData:
         # download dataframe
         try:
             stockprice = web.get_data_yahoo(self.code, start=start)
+            #print(stockprice)
+            #print("update_stockprice:get_date_yahoo")
         except Exception as e:
             print(e)
             print('update_csv error!!!')
 
-        self.stockprice.append(stockprice)
+        self.stockprice = self.stockprice.append(stockprice)
+        self.stockprice.drop_duplicates(inplace=True)
         print('update_csv end')
 
     def update_csv(self, filename=''):

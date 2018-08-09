@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 管理所有的文件，并汇总到DataFrame
 """
@@ -28,7 +28,7 @@ class HKEXNewsDatabase(object):
                 if pagepath[-5:] == '.html':
                     print("HKEXBrokersPage(%s)"%pagepath)
                     try:
-                        #判断该日期的文件是否已经解析
+                        # 判断该日期的文件是否已经解析
                         date = datetime.datetime.strptime(filepath[0:8], '%Y%m%d')
                         if date in self.df_brokersPos.index:
                             continue
@@ -70,12 +70,11 @@ class HKEXNewsDatabase(object):
         self.df_brokersPos = pd.concat([self.df_brokersPos, fdpos])
 
 
-
-
 # ***********************************************************************************************************************
 """
 unittest
 """
+
 
 class TestHKEXNewsDatabase(unittest.TestCase):
     def setUp(self):
@@ -92,3 +91,7 @@ class TestHKEXNewsDatabase(unittest.TestCase):
 
         self.database.process_allpages()
         self.database.save_csv()
+
+
+if __name__ == '__main__':
+    unittest.main()
