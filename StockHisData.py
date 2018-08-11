@@ -13,9 +13,8 @@ import pandas_datareader.data as web
 import fix_yahoo_finance as yf
 yf.pdr_override() # <== that's all it takes :-)
 
-import HKEXNewsHoldingAnalysis
-
 import unittest
+
 
 class StockHisData:
     def __init__(self, home, code):
@@ -31,10 +30,10 @@ class StockHisData:
             print(e)
 
     def save_csv(self, filename =''):
-        print('save_csv begin')
+        print('StockHisData::save_csv begin')
         if self.code is None:
             self.code = 'nonecode'
-            print("process error stock code == None!!!!")
+            print("StockHisData:: process error stock code == None!!!!")
 
         if filename == '':
             filename = self.home + '/stock_price_%s.csv'%self.code
@@ -42,13 +41,13 @@ class StockHisData:
             filename = self.home + '/' + filename
         print(self.stockprice)
         self.stockprice.to_csv(filename)
-        print('save_csv end')
+        print('StockHisData::save_csv end')
 
     def load_csv(self,filename=''):
-        print('load_csv begin')
+        print('StockHisData::load_csv begin')
         if self.code is None:
             self.code = 'nonecode'
-            print("process error stock code == None!!!!")
+            print("StockHisData::process error stock code == None!!!!")
 
         if filename == '':
             filename = self.home + '/stock_price_%s.csv'%self.code
@@ -57,10 +56,10 @@ class StockHisData:
 
         fdprice = pd.read_csv(filename, index_col=0, parse_dates=True)
         self.stockprice = pd.concat([self.stockprice, fdprice])
-        print('load_csv end')
+        print('StockHisData::load_csv end')
 
     def update_stockprice(self, filename=''):
-        print('update_csv begin')
+        print('StockHisData::update_stockprice begin')
         self.stockprice.sort_index(ascending=True)
         start = self.stockprice.index[-1].strftime("%Y-%m-%d")
         stockprice = pd.DataFrame()
@@ -71,13 +70,14 @@ class StockHisData:
             #print("update_stockprice:get_date_yahoo")
         except Exception as e:
             print(e)
-            print('update_csv error!!!')
+            print('StockHisData::update_stockprice error!!!')
 
         self.stockprice = self.stockprice.append(stockprice)
         self.stockprice.drop_duplicates(inplace=True)
-        print('update_csv end')
+        print('StockHisData::update_stockprice end')
 
     def update_csv(self, filename=''):
+        print('StockHisData::update_csv begin')
         if filename == '':
             filepath = self.home + '/stock_price_%s.csv'%self.code
         else:
@@ -89,12 +89,16 @@ class StockHisData:
             self.load_csv(filename)
             self.update_stockprice(filename)
             self.save_csv(filename)
+        print('StockHisData::update_csv end')
+
 """
 unittest
 """
 class TestStockHisData(unittest.TestCase):
+
     def setUp(self):
-        self.stockhisdata = StockHisData(HKEXNewsHoldingAnalysis.searchHtmlCatchPath, "0700.HK")
+        searchHtmlCatchPath = './data/HKEXSearchCach00700'
+        self.stockhisdata = StockHisData(searchHtmlCatchPath, "0700.HK")
 
     def test_report(self):
         self.stockhisdata.update_csv()
