@@ -89,7 +89,7 @@ class BrokersAnalysis(object):
         for key, name in dicBrokers.items():
             closedatas = result['Close'].iloc[-timeperiod:]
             lc = axs[row][col].plot(closedatas, c='r')
-            # axs[row][col].grid(False)
+            axs[row][col].grid(False)
             axs[row][col].set_title(name)
             ax2 = axs[row][col].twinx()
             ax2.plot(result[key].iloc[-timeperiod:], c='b')
@@ -101,7 +101,19 @@ class BrokersAnalysis(object):
                                                 closedatas.max()+5,
                                                 color='g', linestyle=':', lw=1.5)
                 axs[row][col].annotate(day.strftime("%m-%d"),
-                                       xy=(day.date(), closedatas.min()-5))
+                                       xy=(day.date(), closedatas.min()-8))
+            #画季度日期提示线
+            startday = pd.to_datetime('2006-01-01')
+            qdates = pd.date_range(startday, periods=(pd.datetime.today().year-startday.year+1)*4, freq='QS')
+            qdates = qdates[(qdates >= result.index[-timeperiod]) &
+                            (qdates <= result.index[-1])]
+            for day in qdates:
+                axs[row][col].fill_between([day],
+                                           closedatas.min()-5,
+                                           closedatas.max()+5,
+                                           color='y', linestyle=':', lw=1.5)
+                axs[row][col].annotate(day.strftime("%m-%d"),
+                                       xy=(day.date(), closedatas.max()-5))
 
             idx += 1
             col = idx % 2
