@@ -59,7 +59,7 @@ class BrokersAnalysis(object):
         self.brokerspos.load_csv()
         self.stockhisdata.load_csv()
 
-    def draw_grid(self):
+    def draw_grid(self, timeperiod):
         #需要分析的券商
         dicBrokers = {'B01451': u"高盛",
                       'B01274': u"MORGAN STANLEY",
@@ -73,7 +73,6 @@ class BrokersAnalysis(object):
                       'B01955': u"富途",
                       }
         #持续时长
-        timeperiod = 300
         result = pd.DataFrame()
         result = self.stockhisdata.stockprice.join(self.brokerspos.df_brokersPos)
         reportdates = self.reportsdates[(self.reportsdates.index >= result.index[-timeperiod]) &
@@ -134,9 +133,9 @@ class TestBrokersAnalysis(unittest.TestCase):
         self.analyzer = BrokersAnalysis()
 
     def test_processdata_daily(self):
-        #self.analyzer.process_data_daily()
-        self.analyzer.load_data()
-        self.analyzer.draw_grid()
+        self.analyzer.process_data_daily()
+        #self.analyzer.load_data()
+        self.analyzer.draw_grid(90)
 
 
 if __name__ == '__main__':
