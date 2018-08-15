@@ -164,7 +164,8 @@ class HKEXBrokersPosDatabase(object):
         fdpos = pd.read_csv(filename, index_col=0, parse_dates=True)
         self.df_brokersPos = pd.concat([self.df_brokersPos, fdpos])
 
-
+    def get_latestday(self):
+        return self.df_brokersPos.index[-1].date()
 # ***********************************************************************************************************************
 """
 unittest

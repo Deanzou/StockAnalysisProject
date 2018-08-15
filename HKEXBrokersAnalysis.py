@@ -34,6 +34,7 @@ class BrokersAnalysis(object):
     def __init__(self):
         self.brokerspos = HKEXBrokersPosDatabase(searchHtmlCatchPath, '00700')
         self.stockhisdata = StockHisData(searchHtmlCatchPath, "0700.HK")
+        self.stockhisdata.load_csv()
         self.reportsdates = pd.read_csv(searchHtmlCatchPath + '/700ReportsDate.csv', index_col=0, parse_dates=True)
 
         #初始化字体和风格
@@ -43,14 +44,18 @@ class BrokersAnalysis(object):
 
     def process_data_daily(self):
         try:
-            self.brokerspos.init_webdriver()
-            self.brokerspos.downloadHKEXNewsPages365()
-
             self.brokerspos.load_csv()
-            self.brokerspos.process_allpages()
-            self.brokerspos.save_csv()
+            yestoday = (pd.datetime.today() - pd.Timedelta('1 days')).date()
+            #如果已经更新过数据则返回
+            if self.brokerspos.get_latestday() < yestoday:
+                self.brokerspos.init_webdriver()
+                self.brokerspos.downloadHKEXNewsPages365()
 
-            self.stockhisdata.update_csv()
+                self.brokerspos.process_allpages()
+                self.brokerspos.save_csv()
+
+            if self.stockhisdata.get_latestday() < yestoday:
+                self.stockhisdata.update_csv()
         except Exception as e:
             print(e)
             pass
@@ -59,7 +64,7 @@ class BrokersAnalysis(object):
         self.brokerspos.load_csv()
         self.stockhisdata.load_csv()
 
-    def draw_grid(self, timeperiod):
+    def draw_comparisonchart(self, timeperiod):
         #需要分析的券商
         dicBrokers = {'B01451': u"高盛",
                       'B01274': u"MORGAN STANLEY",
@@ -119,7 +124,7 @@ class BrokersAnalysis(object):
             row = idx // 2
 
         fig.legend(lc, (self.stockhisdata.code,), 'upper left')
-        fig.legend((ld,), (u'财报日',), 'upper right')
+        #fig.legend((ld,), (u'财报日',), 'upper right')
         plt.show()
 
 # ***********************************************************************************************************************
@@ -134,8 +139,7 @@ class TestBrokersAnalysis(unittest.TestCase):
 
     def test_processdata_daily(self):
         self.analyzer.process_data_daily()
-        #self.analyzer.load_data()
-        self.analyzer.draw_grid(90)
+        self.analyzer.draw_comparisonchart(90)
 
 
 if __name__ == '__main__':

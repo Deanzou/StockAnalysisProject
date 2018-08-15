@@ -61,7 +61,7 @@ class StockHisData:
     def update_stockprice(self, filename=''):
         print('StockHisData::update_stockprice begin')
         self.stockprice.sort_index(ascending=True)
-        start = self.stockprice.index[-1].strftime("%Y-%m-%d")
+        start = (self.get_latestday()+pd.Timedelta('1 days')).strftime("%Y-%m-%d")
         stockprice = pd.DataFrame()
         # download dataframe
         try:
@@ -91,6 +91,8 @@ class StockHisData:
             self.save_csv(filename)
         print('StockHisData::update_csv end')
 
+    def get_latestday(self):
+        return self.stockprice.index[-1].date()
 """
 unittest
 """
