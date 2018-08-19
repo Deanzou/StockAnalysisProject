@@ -166,6 +166,10 @@ class HKEXBrokersPosDatabase(object):
 
     def get_latestday(self):
         return self.df_brokersPos.index[-1].date()
+
+    # 港交所坑爹，仓位数据是延迟两天的
+    def get_realdatedata(self):
+        return self.df_brokersPos.shift(-2)
 # ***********************************************************************************************************************
 """
 unittest

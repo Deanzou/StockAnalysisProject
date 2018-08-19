@@ -64,6 +64,8 @@ class BrokersAnalysis(object):
         self.brokerspos.load_csv()
         self.stockhisdata.load_csv()
 
+
+    #券商持有仓位对比
     def draw_comparisonchart(self, timeperiod):
         #需要分析的券商
         dicBrokers = {'B01451': u"高盛",
@@ -79,7 +81,8 @@ class BrokersAnalysis(object):
                       }
         #持续时长
         result = pd.DataFrame()
-        result = self.stockhisdata.stockprice.join(self.brokerspos.df_brokersPos)
+        result = self.stockhisdata.stockprice.join(self.brokerspos.get_realdatedata())
+
         reportdates = self.reportsdates[(self.reportsdates.index >= result.index[-timeperiod]) &
                                         (self.reportsdates.index <= result.index[-1])]
 
